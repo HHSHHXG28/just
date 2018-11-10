@@ -50,8 +50,8 @@ msg.delete();
 }
 });
 
-const wait = new Set();
 client.on("message", (message) => {
+    var wait = new Set();
   if (message.content.startsWith(prefix + "new")) {     
       if(wait.has(message.author.id)) return message.channel.send("**يرجى انتظار ساعة اخرى لفتح تيكت آخر .**").then(m => m.delete(3000));
        var args = message.content.split(" ").slice(1).join(" ");     
@@ -170,34 +170,31 @@ client.on('message', message => {
 
  });
   
- client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("510884379397062677");
-    if (!channel) {
-        console.log("!the channel id it's not correct");
-        return;
-    }
-    if (member.id == client.user.id) {
-        return;
-    }
-    console.log('-');
-    var guild;
-    while (!guild)
-     var guild = client.guilds.get("510884378713522207");
-    guild.fetchInvites().then((data) => {
-        data.forEach((Invite, key, map) => {
-            var Inv = Invite.code;
-            if (dat[Inv])
-                if (dat[Inv] < Invite.uses) {
-                    setTimeout(function() {
-                        channel.send(`**! . Bienvenido Pour Just, ${member} . :champagne_glass: .\n:small_orange_diamond: . Invited By: ${Invite.inviter} :maple_leaf: .**`) ;
-                    },1500);
- }
-            dat[Inv] = Invite.uses;
-       
-       });
+const invites = {};
+
+const wait = require('util').promisify(setTimeout);
+
+client.on('ready', () => {
+  wait(1000);
+
+  client.guilds.forEach(g => {
+    g.fetchInvites().then(guildInvites => {
+      invites[g.id] = guildInvites;
     });
+  });
 });
 
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    invites[member.guild.id] = guildInvites;
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const logChannel = member.guild.channels.find(channel => channel.name === "just");
+    if(!logChannel) return;
+    logChannel.send(`**By: <@${inviter.id}> .**`);
+  });
+});
 
 client.on('message' , message => {
 if(message.content === prefix + 'help') {
@@ -206,7 +203,6 @@ if(message.content === prefix + 'help') {
   .setDescription(`
   **
   ─════════════ [ Bot Commands. ] ════════════─
-
   » ${prefix}bc ➺ برودكاست لكل الأعضاء
   » ${prefix}new ➺ لانشاء تذكرة
   » ${prefix}close ➺ لاغلاق تذكرة
@@ -217,5 +213,5 @@ if(message.content === prefix + 'help') {
 }
 });
 
-client.login(process.env.BOT_TOKEN);
  
+client.login(process.env.BOT_TOKEN);
