@@ -192,7 +192,9 @@ client.on('guildMemberAdd', member => {
     const inviter = client.users.get(invite.inviter.id);
     const logChannel = member.guild.channels.find(channel => channel.name === "just");
     if(!logChannel) return;
-    logChannel.send(`**By: <@${inviter.id}> .**`);
+    setTimeout(() => {
+        logChannel.send(`**By: <@${inviter.id}> .**`);
+    }, 3);
   });
 });
 
