@@ -213,5 +213,9 @@ if(message.content === prefix + 'help') {
 }
 });
 
+client.on("guildMemberRemove", mem => {
+    mem.guild.channels.find(a => a.name === "just").send(`${mem} Has left .`);
+});
+
  
 client.login(process.env.BOT_TOKEN);
