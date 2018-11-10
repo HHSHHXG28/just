@@ -171,7 +171,7 @@ client.on('message', message => {
  });
   
  client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("509134309987188790");
+    let channel = member.guild.channels.get("510884379397062677");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
@@ -182,7 +182,7 @@ client.on('message', message => {
     console.log('-');
     var guild;
     while (!guild)
-     var guild = client.guilds.get("498904082904383498");
+     var guild = client.guilds.get("510884378713522207");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
