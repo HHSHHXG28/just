@@ -125,7 +125,7 @@ client.user.setStatus("dnd")
  
 client.on('message', message => {
 
-	if(message.author.id === "474175378118803466" || message.author.id === "494619027130286090") {
+	if(message.author.id === "474175378118803466" || message.author.id === "410778583682777098") {
     if (!message.content.startsWith(prefix)) return;
     var args = message.content.split(' ').slice(1);
     var argresult = args.join(' ');
