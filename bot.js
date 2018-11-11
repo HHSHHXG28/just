@@ -129,7 +129,7 @@ client.on("message", (message) => {
 });
 client.on('ready', () => {
    console.log(`----------------`);
-      console.log(`Just - Script By : ArthuR `);
+      console.log(`abend - Script By : ArthuR `);
         console.log(`----------------`);
       console.log(`ON ${client.guilds.size} Servers '     Script By :  ArthuR' `);
     console.log(`----------------`);
@@ -205,7 +205,7 @@ client.on('guildMemberAdd', member => {
     invites[member.guild.id] = guildInvites;
     const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
     const inviter = client.users.get(invite.inviter.id);
-    const logChannel = member.guild.channels.find(channel => channel.name === "just");
+    const logChannel = member.guild.channels.find(channel => channel.name === "abend");
     if(!logChannel) return;
     setTimeout(() => {
         logChannel.send(`**By: <@${inviter.id}> .**`);
@@ -231,7 +231,7 @@ if(message.content === prefix + 'help') {
 });
 
 client.on("guildMemberRemove", mem => {
-    mem.guild.channels.find(a => a.name === "just").send(`**${mem} Has left .**`);
+    mem.guild.channels.find(a => a.name === "abend").send(`**${mem} Has left .**`);
 });
 
  
