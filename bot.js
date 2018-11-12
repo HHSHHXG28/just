@@ -209,7 +209,7 @@ client.on('guildMemberAdd', member => {
     if(!logChannel) return;
     setTimeout(() => {
         logChannel.send(`**By: <@${inviter.id}> .**`);
-    }, 3);
+    }, 500);
   });
 });
 
