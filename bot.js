@@ -210,6 +210,10 @@ client.on('guildMemberAdd', member => {
     setTimeout(() => {
         logChannel.send(`**By: <@${inviter.id}> .**`);
     }, 500);
+	    var autoRole = member.guild.roles.find(a => a.name === "ÀbenD");
+if(!autoRole) return;
+if(member.user.bot) return;
+member.addRole(autoRole);
   });
 });
 
